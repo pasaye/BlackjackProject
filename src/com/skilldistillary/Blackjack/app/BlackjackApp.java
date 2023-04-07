@@ -2,10 +2,10 @@ package com.skilldistillary.Blackjack.app;
 
 import java.util.Scanner;
 
-public class Dealing {
+public class BlackjackApp {
 	
 	public static void main(String[] args) {
-		Dealing deal = new Dealing();
+		BlackjackApp deal = new BlackjackApp();
 		deal.run();
 		
 	}
