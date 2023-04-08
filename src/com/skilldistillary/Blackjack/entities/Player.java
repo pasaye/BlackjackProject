@@ -21,9 +21,9 @@ public class Player {
 		playerHand.isBlackJack();
 	}
 	
-	public void playerHandBust() {
+	public void playerHandBust(int sum) {
 	
-		playerHand.isBust();
+		playerHand.isBust(sum);
 	}
 	
 	

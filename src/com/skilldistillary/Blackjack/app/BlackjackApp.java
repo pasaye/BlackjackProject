@@ -14,6 +14,7 @@ public class BlackjackApp {
 	private Player play = new Player();
 	private Deck deck = new Deck();
 	private Hand hand = new BlackjackHand();
+	private BlackjackHand bjh = new BlackjackHand();
 
 	public static void main(String[] args) {
 		BlackjackApp deal = new BlackjackApp();
@@ -48,26 +49,55 @@ public class BlackjackApp {
 		System.out.println("Dealer is dealing");
 
 		Card firstCard = deal.deal();
-		System.out.println("Players first card:" + firstCard);
+		System.out.println("Players first card: " + firstCard);
 		Card dealerFirstCardDown = deal.deal();
 		System.out.println("Dealers card face down");
 		Card secondCard = deal.deal();
-		System.out.println("Players second card:" + secondCard);
+		System.out.println("Players second card: " + secondCard);
 		Card dealerSecondCard = deal.deal();
 		System.out.println("Dealer second card: " + dealerSecondCard);
 
-		
 		int playerSumOfCards = firstCard.getRank().getCardRank() + secondCard.getRank().getCardRank();
 		int dealerSumOfCards = dealerFirstCardDown.getRank().getCardRank() + dealerSecondCard.getRank().getCardRank();
-		
-		System.out.println(playerSumOfCards);
-		
+
+		hitOrStand(kb, playerSumOfCards, dealerSumOfCards);
 
 	}
-	
-	
-	private void hitOrStand() {
-		
+
+	private void hitOrStand(Scanner kb, int player, int dealer) {
+		System.out.println(player);
+		int choice = 0;
+		do {
+			System.out.println();
+			System.out.println("Would you like to Hit or Stand?");
+			System.out.println("Enter the number 1 to Hit \nEnter the number 2 to Stand.");
+			choice = kb.nextInt();
+
+		switch (choice) {
+		case 1:
+			Card addCard = deal.dealOnHit();
+			int sum = player +=  addCard.getRank().getCardRank();
+			if(sum < 21) {
+				System.out.println("Your new card: " + addCard + "\n Your current score is: " + sum);	
+			}else {
+				System.out.println("Your Hand: " + sum);
+				play.playerHandBust(sum);
+				
+			}
+			break;
+		case 2:
+			System.out.println("Dealers turn");
+			dealerStartsTurn(kb, dealer);
+			break;
+		default:
+			System.out.println("Invalid Entry, Please enter the numerical value #1 or #2");
+			break;
+		}
+		} while (choice != 2);
 	}
 
+	private void dealerStartsTurn(Scanner kb, int dealer) {
+		// TODO Auto-generated method stub
+
+	}
 }
