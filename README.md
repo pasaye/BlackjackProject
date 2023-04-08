@@ -18,6 +18,11 @@ either player goes over 21 its a loss.
 
 #### Lessons Learned
 
+Understanding: I've been trying to understand code the way my cohort or instructors understand it, but I have to code how I 
+understand it. For instance when I ask for help I understand what is being said to me or the path their code is taking(I can 
+read it), I always feel confused on how they thought of said path. I just need to learn how things work and use them how I 
+see them being used instead of trying to use code the way other see it.
+
 Working Backwards?: I'v been having difficulty conceptualizing how to build an app working from a class towards a main. So, I
 threw it all out and started to work from the main out. It's easier for me to start from the from the main and think "OK, what's 
 the next step?" and then connect the classes from there. For instance, going through he steps of how the game starts. OK, the dealer deals, what do I need? a deck to build a hand. So, I go to the class and add what I need instead of build the class and then attaching

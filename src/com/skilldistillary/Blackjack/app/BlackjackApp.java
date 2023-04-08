@@ -60,11 +60,11 @@ public class BlackjackApp {
 		int playerSumOfCards = firstCard.getRank().getCardRank() + secondCard.getRank().getCardRank();
 		int dealerSumOfCards = dealerFirstCardDown.getRank().getCardRank() + dealerSecondCard.getRank().getCardRank();
 
-		hitOrStand(kb, playerSumOfCards, dealerSumOfCards);
+		hitOrStand(kb, playerSumOfCards, dealerSumOfCards, dealerFirstCardDown);
 
 	}
 
-	private void hitOrStand(Scanner kb, int player, int dealer) {
+	private void hitOrStand(Scanner kb, int player, int dealer, Card dealerFirstCardDown) {
 		System.out.println(player);
 		int choice = 0;
 		do {
@@ -87,7 +87,7 @@ public class BlackjackApp {
 			break;
 		case 2:
 			System.out.println("Dealers turn");
-			dealerStartsTurn(kb, dealer);
+			dealerStartsTurn(kb, dealer, dealerFirstCardDown);
 			break;
 		default:
 			System.out.println("Invalid Entry, Please enter the numerical value #1 or #2");
@@ -96,8 +96,8 @@ public class BlackjackApp {
 		} while (choice != 2);
 	}
 
-	private void dealerStartsTurn(Scanner kb, int dealer) {
-		// TODO Auto-generated method stub
+	private void dealerStartsTurn(Scanner kb, int dealer, Card dealerFirstCardDown) {
+		System.out.println("Dealer flips card " + dealerFirstCardDown);
 
 	}
 }
