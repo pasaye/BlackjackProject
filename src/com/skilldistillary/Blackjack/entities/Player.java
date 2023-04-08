@@ -17,8 +17,8 @@ public class Player {
 	}
 	
 	
-	public void playerHandBlackJack() {
-		playerHand.isBlackJack();
+	public void playerHandBlackJack(int sum) {
+		playerHand.isBlackJack(sum);
 	}
 	
 	public void playerHandBust(int sum) {

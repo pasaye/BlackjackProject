@@ -23,8 +23,8 @@ public class BlackjackHand extends Hand {
 		return i;
 	}
 
-	public boolean isBlackJack() {
-		if(getHandValue()== 21) {
+	public boolean isBlackJack(int sum) {
+		if(sum == 21) {
 			System.out.println("BLACKJACK!!!!");
 			return true;
 		} else {

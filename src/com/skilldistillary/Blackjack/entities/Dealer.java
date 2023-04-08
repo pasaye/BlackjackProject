@@ -35,8 +35,8 @@ public class Dealer extends Player {
 		return newCard;
 	}
 
-	public void dealerHandBlackJack() {
-		dealerHand.isBlackJack();
+	public void dealerHandBlackJack(int sum) {
+		dealerHand.isBlackJack(sum);
 	}
 	
 	public void dealerHandBust(int sum) {

@@ -17,8 +17,8 @@ public class BlackjackApp {
 	private BlackjackHand bjh = new BlackjackHand();
 
 	public static void main(String[] args) {
-		BlackjackApp deal = new BlackjackApp();
-		deal.run();
+		BlackjackApp dealapp = new BlackjackApp();
+		dealapp.run();
 
 	}
 
@@ -67,32 +67,40 @@ public class BlackjackApp {
 	private void hitOrStand(Scanner kb, int player, int dealer, Card dealerFirstCardDown) {
 		System.out.println(player);
 		int choice = 0;
-		do {
+	loop:do {
 			System.out.println();
 			System.out.println("Would you like to Hit or Stand?");
 			System.out.println("Enter the number 1 to Hit \nEnter the number 2 to Stand.");
 			choice = kb.nextInt();
 
-		switch (choice) {
-		case 1:
-			Card addCard = deal.dealOnHit();
-			int sum = player +=  addCard.getRank().getCardRank();
-			if(sum < 21) {
-				System.out.println("Your new card: " + addCard + "\n Your current score is: " + sum);	
-			}else {
-				System.out.println("Your Hand: " + sum);
-				play.playerHandBust(sum);
-				
+			switch (choice) {
+			case 1:
+				Card addCard = deal.dealOnHit();
+				int sum = player += addCard.getRank().getCardRank();
+				if (sum < 21) {
+					System.out.println("Your new card: " + addCard + "\n Your current score is: " + sum);
+
+				} else if (sum == 21) {
+					System.out.println("Winner!!!! " + sum);
+					play.playerHandBlackJack(sum);
+					run();
+					break loop;
+				} else {
+					System.out.println("Your Hand: " + sum);
+					play.playerHandBust(sum);
+					run();
+					break loop;
+
+				}
+				break;
+			case 2:
+				System.out.println("Dealers turn");
+				dealerStartsTurn(kb, dealer, dealerFirstCardDown);
+				break;
+			default:
+				System.out.println("Invalid Entry, Please enter the numerical value #1 or #2");
+				break;
 			}
-			break;
-		case 2:
-			System.out.println("Dealers turn");
-			dealerStartsTurn(kb, dealer, dealerFirstCardDown);
-			break;
-		default:
-			System.out.println("Invalid Entry, Please enter the numerical value #1 or #2");
-			break;
-		}
 		} while (choice != 2);
 	}
 
