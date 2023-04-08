@@ -1,19 +1,36 @@
 package com.skilldistillary.Blackjack.entities;
 
 public class Player {
-	private Hand hand;
+	private BlackjackHand playerHand = new BlackjackHand();
 
 	public Hand getHandPlayer() {
-		return hand;
+		return playerHand;
 	}
 
-	public void setHandPlayer(Hand hand) {
-		this.hand = hand;
+	public void setHandPlayer(BlackjackHand hand) {
+		this.playerHand = hand;
 	}
-
+	
+	
+	public int checkPlayerScore() {
+		return playerHand.getHandValue();
+	}
+	
+	
+	public void playerHandBlackJack() {
+		playerHand.isBlackJack();
+	}
+	
+	public void playerHandBust() {
+	
+		playerHand.isBust();
+	}
+	
+	
+	
 	@Override
 	public String toString() {
-		return "Player hand=" + hand;
+		return "Player hand=" + playerHand;
 	}
 
 }
