@@ -78,15 +78,15 @@ public class BlackjackApp {
 				Card addCard = deal.dealOnHit();
 				int sum = player += addCard.getRank().getCardRank();
 				if (sum < 21) {
-					System.out.println("Your new card: " + addCard + "\n Your current score is: " + sum);
+					System.out.println("Your new card: " + addCard + "\nYour current score is: " + sum);
 
 				} else if (sum == 21) {
-					System.out.println("Winner!!!! " + sum);
+					System.out.println("Winner!!!! " + addCard + " " + sum);
 					play.playerHandBlackJack(sum);
 					run();
 					break loop;
 				} else {
-					System.out.println("Your Hand: " + sum);
+					System.out.println("Your Hand: " + addCard + " " + sum);
 					play.playerHandBust(sum);
 					run();
 					break loop;
