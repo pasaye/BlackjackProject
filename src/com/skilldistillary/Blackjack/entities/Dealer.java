@@ -22,13 +22,10 @@ public class Dealer extends Player {
 		return dealtHand;
 	}
 	
-	public void addPlayerCard(Card card) {
-		dealerHand.addCard(card);
-	}
-
 	public void addDealerCard(Card card) {
 		dealerHand.addCard(card);
 	}
+
 	
 	public void dealerHandBlackJack() {
 		dealerHand.isBlackJack();

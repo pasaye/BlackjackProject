@@ -1,10 +1,7 @@
 package com.skilldistillary.Blackjack.app;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import com.skilldistillary.Blackjack.entities.Card;
 import com.skilldistillary.Blackjack.entities.Dealer;
 import com.skilldistillary.Blackjack.entities.Player;
 
@@ -43,49 +40,47 @@ public class BlackjackApp {
 		System.out.println();
 		dealer.shuffleCards();
 		System.out.println("Dealer is dealing");
-		
-		
-		
-		dealer.addPlayerCard(dealer.deal());
-		System.out.println("Players first card: " + dealer);
-		
+
+		player.dealtCard(dealer.deal());
+		System.out.println("Players first card: " + player);
+
 		dealer.addDealerCard(dealer.deal());
 		System.out.println("Dealers first card: face down");
-		
-		dealer.addPlayerCard(dealer.deal());
-		System.out.println("Players second card: " + dealer);
-		
+
+		player.dealtCard(dealer.deal());
+		System.out.println("Players second card: " + player);
+
 		dealer.addDealerCard(dealer.deal());
 		System.out.println("Dealer second card: " + dealer);
-		
-		
-//		Card firstCard = dealer.deal();
-//		Card dealerFirstCardDown = dealer.deal();
-//		Card secondCard = dealer.deal();
-//		System.out.println("Players second card: " + secondCard);
-//		Card dealerSecondCard = dealer.deal();
-//		System.out.println("Dealer second card: " + dealerSecondCard);
-//
-//		int playerSumOfCards = firstCard.getRank().getCardRank() + secondCard.getRank().getCardRank();
-//		int dealerSumOfCards = dealerFirstCardDown.getRank().getCardRank() + dealerSecondCard.getRank().getCardRank();
 
-		hitOrStand(kb);
+		System.out.println("What would you like to do? \n 1:Hit \n 2: Stand");
+		int choice = kb.nextInt();
+		switch (choice) {
+		case 1:
+			hitOrStand(kb);
+			run();
+			break;
+		case 2:
+			dealerStartsTurn();
+			run();
+			break;
+		default:
+			System.out.println("Invalid Entry. Please enter numerical value #1 or #2. ");
+			break;
+
+		}
 
 	}
 
 	private void hitOrStand(Scanner kb) {
-		
-			
+
 	}
 
-	private void dealerStartsTurn() { 
-		
+	private void dealerStartsTurn() {
+
 	}
-	
-		
+
 	private void checkWinner() {
-		
-		
-		
+
 	}
 }

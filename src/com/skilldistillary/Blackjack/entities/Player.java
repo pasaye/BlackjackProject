@@ -18,6 +18,10 @@ public class Player {
 	
 		playerHand.isBust();
 	}
+	
+	public void dealtCard(Card card) {
+		playerHand.addCard(card);
+	}
 
 	public Hand getHandPlayer() {
 		return playerHand;
@@ -27,9 +31,9 @@ public class Player {
 		this.playerHand = hand;
 	}
 	
-//	@Override
-//	public String toString() {
-//		return "Player hand=" + playerHand;
-//	}
+	@Override
+	public String toString() {
+		return "Player holds" + playerHand;
+	}
 
 }
