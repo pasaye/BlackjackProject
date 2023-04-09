@@ -91,14 +91,9 @@ public class BlackjackApp {
 		player.dealtCard(dealer.deal());
 		System.out.println(player);
 		System.out.println("New total " + player.getHandPlayer().getHandValue());
-		if (player.getHandPlayer().getHandValue() > 21) {
-			player.playerHandBust();
+			blackjackOrBust();
 			playAgain(kb);
 		
-		} else if (player.getHandPlayer().getHandValue() == 21) {
-			player.playerHandBlackJack();
-			playAgain(kb);
-		}
 
 		int choice = 0;
 		loop: do {
@@ -108,16 +103,9 @@ public class BlackjackApp {
 			case 1:
 				player.dealtCard(dealer.deal());
 				System.out.println("You now hold:" + player.getHandPlayer().getHandValue());
-				if (player.getHandPlayer().getHandValue() > 21) {
-					player.playerHandBust();
+					blackjackOrBust();
 					playAgain(kb);
 					break loop;
-				} else if (player.getHandPlayer().getHandValue() == 21) {
-					player.playerHandBlackJack();
-					playAgain(kb);
-					break loop;
-				}
-				break;
 			case 2:
 				dealerStartsTurn();
 				break;
@@ -136,6 +124,12 @@ public class BlackjackApp {
 
 	private void checkWinner() {
 
+	}
+	
+	
+	private void blackjackOrBust() {
+		player.playerHandBust();
+		player.playerHandBlackJack();
 	}
 
 	private void playAgain(Scanner kb) {
