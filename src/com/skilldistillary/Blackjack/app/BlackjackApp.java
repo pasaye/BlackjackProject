@@ -2,6 +2,7 @@ package com.skilldistillary.Blackjack.app;
 
 import java.util.Scanner;
 
+import com.skilldistillary.Blackjack.entities.BlackjackHand;
 import com.skilldistillary.Blackjack.entities.Dealer;
 import com.skilldistillary.Blackjack.entities.Player;
 
@@ -9,6 +10,7 @@ public class BlackjackApp {
 
 	private Dealer dealer = new Dealer();
 	private Player player = new Player();
+	private BlackjackHand hand = new BlackjackHand();
 
 	public static void main(String[] args) {
 		BlackjackApp dealapp = new BlackjackApp();
@@ -25,14 +27,22 @@ public class BlackjackApp {
 
 	public void displayWelcome(Scanner kb) {
 		System.out.println("Lets Play");
-		System.out.println("Please Enter \n1: To Play \nAny Key: To quit");
+		System.out.println("Please Enter \n1: To Play \n2: To quit");
 		int userChoice = kb.nextInt();
 		kb.nextLine();
-		if (userChoice == 1) {
+		switch (userChoice) {
+		case 1:
 			startBlackjack(kb);
-		} else {
+			break;
+		case 2:
 			System.out.println("GoodBye");
+			break;
+		default:
+			System.out.println("Invaild Entry");
+			break;
+
 		}
+
 	}
 
 	private void startBlackjack(Scanner kb) {
@@ -44,7 +54,7 @@ public class BlackjackApp {
 		player.dealtCard(dealer.deal());
 		System.out.println("Players first card: " + player);
 
-		dealer.addDealerCard(dealer.deal());
+//		dealer.addDealerCard(dealer.deal());
 		System.out.println("Dealers first card: face down");
 
 		player.dealtCard(dealer.deal());
@@ -52,8 +62,12 @@ public class BlackjackApp {
 
 		dealer.addDealerCard(dealer.deal());
 		System.out.println("Dealer second card: " + dealer);
+		System.out.println();
+		System.out.println();
 
-		System.out.println("What would you like to do? \n 1:Hit \n 2: Stand");
+		System.out.println(player.getHandPlayer().getHandValue());
+		System.out.println();
+		System.out.println("What would you like to do? \n 1:Hit \n 2:Stand");
 		int choice = kb.nextInt();
 		switch (choice) {
 		case 1:
@@ -73,6 +87,12 @@ public class BlackjackApp {
 	}
 
 	private void hitOrStand(Scanner kb) {
+		System.out.println(player.getHandPlayer());
+		System.out.println("Current score: " + player.getHandPlayer().getHandValue());
+		
+		do {
+			
+		}while();
 
 	}
 
