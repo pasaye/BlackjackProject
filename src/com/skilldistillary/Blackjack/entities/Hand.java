@@ -42,7 +42,7 @@ public abstract class Hand {
 	}
 
 
-	@Override
+	
 	public String toString() {
 		return "Hand: " + cards;
 	}

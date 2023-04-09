@@ -8,9 +8,9 @@ public class Dealer extends Player {
 	private BlackjackHand dealerHand;
 
 	public Dealer() {
+		super();
 		deck = new Deck();
-		dealerHand = new BlackjackHand();
-
+		dealerHand = new BlackjackHand();	
 	}
 
 	public void shuffleCards() {
@@ -22,30 +22,22 @@ public class Dealer extends Player {
 		return dealtHand;
 	}
 	
-	
-	
-	public int checkDealerScore() {
-		return dealerHand.getHandValue();
+	public void addPlayerCard(Card card) {
+		dealerHand.addCard(card);
 	}
 
-	
-	public Card dealOnHit() {
-		Card newCard = deck.deal();
-		
-		return newCard;
-	}
-
-	public void dealerHandBlackJack(int sum) {
-		dealerHand.isBlackJack(sum);
+	public void addDealerCard(Card card) {
+		dealerHand.addCard(card);
 	}
 	
-	public void dealerHandBust(int sum) {
-	
-		dealerHand.isBust(sum);
+	public void dealerHandBlackJack() {
+		dealerHand.isBlackJack();
 	}
 	
+	public void dealerHandBust() {
 	
-	
+		dealerHand.isBust();
+	}
 	
 	public Deck getDeck() {
 		return deck;
@@ -65,7 +57,7 @@ public class Dealer extends Player {
 
 	@Override
 	public String toString() {
-		return "Dealer [deck=" + deck + ", dealerHand=" + dealerHand + "]";
+		return "Dealt is " + dealerHand;
 	}
 
 }

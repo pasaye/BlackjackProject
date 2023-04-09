@@ -4,14 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlackjackHand extends Hand {
-	
-	
-	
 
 	public BlackjackHand() {
-		super();
-		
-		
+		super();	
 	}
 
 	@Override
@@ -23,21 +18,19 @@ public class BlackjackHand extends Hand {
 		return i;
 	}
 
-	public boolean isBlackJack(int sum) {
-		if(sum == 21) {
+	public boolean isBlackJack() {
+		if(getHandValue() == 21) {
 			System.out.println("BLACKJACK!!!!");
 			return true;
 		} else {
 			return false;
 			
-		}
-		
-		
+		}	
 	}
 	
 	
-	public boolean isBust(int sum) {
-		if(sum > 21) {
+	public boolean isBust() {
+		if(getHandValue()> 21) {
 			System.out.println("BUST!!! YOU LOSE!!!");
 			return true;
 		}else {
@@ -48,7 +41,7 @@ public class BlackjackHand extends Hand {
 
 	@Override
 	public String toString() {
-		return "BlackjackHand [cards=" + cards + "]";
+		return " " + cards;
 	}
 	
 	
