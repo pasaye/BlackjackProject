@@ -54,7 +54,7 @@ public class Dealer extends Player {
 
 	@Override
 	public String toString() {
-		return "Dealt is " + dealerHand;
+		return "Dealer holds " + dealerHand;
 	}
 
 }

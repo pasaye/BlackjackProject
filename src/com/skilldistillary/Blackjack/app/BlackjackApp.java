@@ -52,16 +52,16 @@ public class BlackjackApp {
 		System.out.println("Dealer is dealing");
 
 		player.dealtCard(dealer.deal());
-		System.out.println("Players first card: " + player);
+		System.out.println(player);
 
 //		dealer.addDealerCard(dealer.deal());
 		System.out.println("Dealers first card: face down");
 
 		player.dealtCard(dealer.deal());
-		System.out.println("Players second card: " + player);
+		System.out.println(player);
 
 		dealer.addDealerCard(dealer.deal());
-		System.out.println("Dealer second card: " + dealer);
+		System.out.println(dealer);
 		System.out.println();
 		System.out.println();
 
@@ -72,11 +72,9 @@ public class BlackjackApp {
 		switch (choice) {
 		case 1:
 			hitOrStand(kb);
-			run();
 			break;
 		case 2:
 			dealerStartsTurn();
-			run();
 			break;
 		default:
 			System.out.println("Invalid Entry. Please enter numerical value #1 or #2. ");
@@ -88,11 +86,47 @@ public class BlackjackApp {
 
 	private void hitOrStand(Scanner kb) {
 		System.out.println(player.getHandPlayer());
-		System.out.println("Current score: " + player.getHandPlayer().getHandValue());
+		System.out.println("  Current score:" + player.getHandPlayer().getHandValue());
+
+		player.dealtCard(dealer.deal());
+		System.out.println(player);
+		System.out.println("New total " + player.getHandPlayer().getHandValue());
+		if (player.getHandPlayer().getHandValue() > 21) {
+			player.playerHandBust();
+			playAgain(kb);
 		
-		do {
-			
-		}while();
+		} else if (player.getHandPlayer().getHandValue() == 21) {
+			player.playerHandBlackJack();
+			playAgain(kb);
+		}
+
+		int choice = 0;
+		loop: do {
+			System.out.println("Would like to Hit again or Stand?" + "\n1:Hit \n2:Stand");
+			choice = kb.nextInt();
+			switch (choice) {
+			case 1:
+				player.dealtCard(dealer.deal());
+				System.out.println("You now hold:" + player.getHandPlayer().getHandValue());
+				if (player.getHandPlayer().getHandValue() > 21) {
+					player.playerHandBust();
+					playAgain(kb);
+					break loop;
+				} else if (player.getHandPlayer().getHandValue() == 21) {
+					player.playerHandBlackJack();
+					playAgain(kb);
+					break loop;
+				}
+				break;
+			case 2:
+				dealerStartsTurn();
+				break;
+			default:
+				System.out.println("Invalid Entry");
+				break;
+			}
+
+		} while (choice != 2);
 
 	}
 
@@ -101,6 +135,27 @@ public class BlackjackApp {
 	}
 
 	private void checkWinner() {
+
+	}
+
+	private void playAgain(Scanner kb) {
+		System.out.println("Play again? 1: yes, 2: no");
+		int choice = kb.nextInt();
+		player.getHandPlayer().clear();
+		dealer.getHandDealer().clear();
+
+		switch (choice) {
+
+		case 1:
+			run();
+			break;
+		case 2:
+			System.out.println("See ya!");
+			break;
+		default:
+			System.out.println("Invalid entry");
+			break;
+		}
 
 	}
 }
