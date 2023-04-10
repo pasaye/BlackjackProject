@@ -20,7 +20,7 @@ public class BlackjackHand extends Hand {
 
 	public boolean isBlackJack() {
 		if(getHandValue() == 21) {
-			System.out.println("BLACKJACK!!!!");
+			System.out.println("BLACKJACK!!!! \nOTHER PLAYER IS A LOSER");
 			return true;
 		} else {
 			return false;
@@ -31,7 +31,7 @@ public class BlackjackHand extends Hand {
 	
 	public boolean isBust() {
 		if(getHandValue()> 21) {
-			System.out.println("BUST!!! YOU LOSE!!!");
+			System.out.println("BUST!!! LOSER!!!");
 			return true;
 		}else {
 			return false;
