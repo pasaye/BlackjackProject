@@ -25,6 +25,10 @@ public class Dealer extends Player {
 	public void addDealerCard(Card card) {
 		dealerHand.addCard(card);
 	}
+	
+	public int checkSize() {
+		return deck.deckSize();
+	}
 
 	
 	public void dealerHandBlackJack() {

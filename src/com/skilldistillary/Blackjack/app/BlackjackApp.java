@@ -1,5 +1,6 @@
 package com.skilldistillary.Blackjack.app;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.skilldistillary.Blackjack.entities.Dealer;
@@ -25,21 +26,27 @@ public class BlackjackApp {
 	}
 
 	public void displayWelcome(Scanner kb) {
-		System.out.println("Lets Play");
-		System.out.println("Please Enter \n1: To Play \n2: To quit");
-		int userChoice = kb.nextInt();
-		kb.nextLine();
-		switch (userChoice) {
-		case 1:
-			startBlackjack(kb);
-			break;
-		case 2:
-			System.out.println("GoodBye");
-			break;
-		default:
-			System.out.println("Invaild Entry");
-			break;
+		try {
+			System.out.println("Lets Play");
+			System.out.println("Please Enter \n1: To Play \n2: To quit");
+			int userChoice = kb.nextInt();
+			kb.nextLine();
+			switch (userChoice) {
+			case 1:
+				startBlackjack(kb);
+				break;
+			case 2:
+				System.out.println("GoodBye");
+				break;
+			default:
+				System.out.println("Invaild Entry");
+				run();
+				break;
+			}
 
+		} catch (InputMismatchException e) {
+			System.out.println("Try again Numbers 1 or 2 only");
+			run();
 		}
 
 	}
@@ -59,22 +66,29 @@ public class BlackjackApp {
 
 		dealer.addDealerCard(dealer.deal());
 		System.out.println(dealer);
-		System.out.println();
-		System.out.println(player.getHandPlayer().getHandValue());
-		// blackjackOrBust(kb);
-		System.out.println("What would you like to do? \n 1:Hit \n 2:Stand");
-		int choice = kb.nextInt();
-		switch (choice) {
-		case 1:
-			hitOrStand(kb);
-			break;
-		case 2:
-			dealerStartsTurn(kb);
-			break;
-		default:
-			System.out.println("Invalid Entry. Please enter numerical value #1 or #2. ");
-			break;
 
+		System.out.println("Player total:" + player.getHandPlayer().getHandValue());
+		if (player.getHandPlayer().getHandValue() == 21 || player.getHandPlayer().getHandValue() > 21) {
+			blackjackOrBust(kb);
+		} else {
+			try {
+				System.out.println("What would you like to do? \n 1:Hit \n 2:Stand");
+				int choice = kb.nextInt();
+				switch (choice) {
+				case 1:
+					hitOrStand(kb);
+					break;
+				case 2:
+					dealerStartsTurn(kb);
+					break;
+				default:
+					System.out.println("Invalid Entry. Please enter numerical value #1 or #2. ");
+					break;
+
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("Enter 1 or 2 \nLose all save data \nStart Over.");
+			}
 		}
 
 	}
@@ -90,34 +104,36 @@ public class BlackjackApp {
 			blackjackOrBust(kb);
 
 		}
+		if (dealer.checkSize() > MIN_DECK) {
 
-		int choice = 0;
-		loop: do {
-			System.out.println("Would like to Hit again or Stand?" + "\n1:Hit \n2:Stand");
-			choice = kb.nextInt();
-			switch (choice) {
-			case 1:
-				player.dealtCard(dealer.deal());
-				System.out.println("You now hold:" + player.getHandPlayer().getHandValue());
-				blackjackOrBust(kb);
-				playAgain(kb);
-				break loop;
-			case 2:
-				dealerStartsTurn(kb);
-				break;
-			default:
-				System.out.println("Invalid Entry");
-				break;
-			}
+			int choice = 0;
+			loop: do {
+				System.out.println("Would like to Hit again or Stand?" + "\n1:Hit \n2:Stand");
+				choice = kb.nextInt();
+				switch (choice) {
+				case 1:
+					player.dealtCard(dealer.deal());
+					System.out.println("You now hold:" + player.getHandPlayer().getHandValue());
+					blackjackOrBust(kb);
+					playAgain(kb);
+					break loop;
+				case 2:
+					dealerStartsTurn(kb);
+					break;
+				default:
+					System.out.println("Invalid Entry");
+					break;
+				}
 
-		} while (choice != 2);
+			} while (choice != 2);
+		}
 
 	}
 
 	private void dealerStartsTurn(Scanner kb) {
 		dealer.addDealerCard(dealer.deal());
 		System.out.println("Dealer revealing hand...");
-		System.out.println(dealer.getHandDealer());
+		System.out.println(dealer.getHandDealer() + "Total: " + dealer.getHandDealer().getHandValue());
 
 		if (dealer.getHandDealer().getHandValue() < 17) {
 
@@ -138,11 +154,13 @@ public class BlackjackApp {
 		if (dealer.getHandDealer().getHandValue() > player.getHandPlayer().getHandValue()
 				&& dealer.getHandDealer().getHandValue() < 21) {
 			System.out.println("house wins!");
-			System.out.println("Dealer wins with: " + dealer.getHandDealer() + " \nTotal" + dealer.getHandDealer().getHandValue());
+			System.out.println("Dealer wins with: " + dealer.getHandDealer() + " \nTotal: "
+					+ dealer.getHandDealer().getHandValue());
 		} else if (dealer.getHandDealer().getHandValue() < player.getHandPlayer().getHandValue()
 				&& player.getHandPlayer().getHandValue() < 21) {
 			System.out.println("Player wins!");
-			System.out.println("Player wins with: " + player.getHandPlayer() + " \nTotal" + player.getHandPlayer().getHandValue());
+			System.out.println("Player wins with: " + player.getHandPlayer() + " \nTotal: "
+					+ player.getHandPlayer().getHandValue());
 		}
 
 	}
@@ -156,22 +174,28 @@ public class BlackjackApp {
 	}
 
 	private void playAgain(Scanner kb) {
-		System.out.println("Play again? 1: yes, 2: no");
-		int choice = kb.nextInt();
 		player.getHandPlayer().clear();
 		dealer.getHandDealer().clear();
 
-		switch (choice) {
+		if (dealer.checkSize() < MIN_DECK) {
+			System.out.println("Game Over, Start new game.");
 
-		case 1:
-			run();
-			break;
-		case 2:
-			System.out.println("See ya!");
-			break;
-		default:
-			System.out.println("Invalid entry");
-			break;
+		} else {
+			System.out.println("Play again? 1: yes, 2: no");
+			int choice = kb.nextInt();
+
+			switch (choice) {
+
+			case 1:
+				run();
+				break;
+			case 2:
+				System.out.println("See ya!");
+				break;
+			default:
+				System.out.println("Invalid entry");
+				break;
+			}
 		}
 
 	}
